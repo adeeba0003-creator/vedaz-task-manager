@@ -87,7 +87,7 @@ export default function TasksPage() {
   const fetchTasks = async () => {
     try {
       setLoading(true);
-      const res = await fetch('http://localhost:3001/tasks');
+      const res = await fetch('https://vedaz-task-manager.onrender.com/tasks');
       if (!res.ok) throw new Error('Failed to fetch tasks');
       const data = await res.json();
       setTasks(data);
@@ -108,7 +108,7 @@ export default function TasksPage() {
     if (!formData.title.trim()) return;
 
     try {
-      const res = await fetch('http://localhost:3001/tasks', {
+      const res = await fetch('https://vedaz-task-manager.onrender.com/tasks', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
@@ -130,7 +130,7 @@ export default function TasksPage() {
     if (!editingTask || !formData.title.trim()) return;
 
     try {
-      const res = await fetch(`http://localhost:3001/tasks/${editingTask.id}`, {
+      const res = await fetch(`https://vedaz-task-manager.onrender.com/tasks/${editingTask.id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
@@ -148,7 +148,7 @@ export default function TasksPage() {
   // Delete Task
   const handleDeleteTask = async (id: string) => {
     try {
-      const res = await fetch(`http://localhost:3001/tasks/${id}`, {
+      const res = await fetch(`https://vedaz-task-manager.onrender.com/tasks/${id}`, {
         method: 'DELETE',
       });
       if (res.ok) {
@@ -164,7 +164,7 @@ export default function TasksPage() {
   const handleStatusToggle = async (task: Task) => {
     const nextStatus = task.status === 'Completed' ? 'In Progress' : 'Completed';
     try {
-      const res = await fetch(`http://localhost:3001/tasks/${task.id}`, {
+      const res = await fetch(`https://vedaz-task-manager.onrender.com/tasks/${task.id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: nextStatus }),
